@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sodaychan Technologies is your partner in innovative web solutions, digital marketing, and mobile applications. We're launching soon!">
+    <meta name="keywords" content="Sodaychan, website development, digital marketing, mobile app development, technology solutions, innovative solutions">
+    <meta name="author" content="Sodaychan Technologies">
+    <title>Sodaychan.tech | Coming Soon</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Sodaychan.tech | Coming Soon">
+    <meta property="og:description" content="Join us at Sodaychan Technologies, where innovation meets technology. Launching soon!">
+    <meta property="og:image" content="https://via.placeholder.com/1920x1080">
+    <meta property="og:url" content="https://sodaychan.tech">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sodaychan.tech | Coming Soon">
+    <meta name="twitter:description" content="Stay tuned for Sodaychan Technologies, your digital solutions provider.">
+    <meta name="twitter:image" content="https://via.placeholder.com/1920x1080">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Animate.css for Animations -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0b0c10, #1f2833);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            animation: fadeIn 2s;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: slideInDown 2s;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            font-size: 2rem;
+            font-weight: 300;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+
+        .countdown-item span {
+            font-size: 3rem;
+            display: block;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            margin-top: 30px;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            background: linear-gradient(90deg, #ffdd00, #fbb034);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #fbb034, #ffdd00);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Services Section Styles */
+        .services-section {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .services-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .service-item {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .service-icon {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-right: 10px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #1f2833;
+            padding: 50px 20px;
+            color: #ffffff;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .contact-form button {
+            background: linear-gradient(90deg, #ffdd00, #fbb034);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: linear-gradient(90deg, #fbb034, #ffdd00);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="overlay"></div>
+        <div class="hero-content text-white">
+            <h1 class="animate__animated animate__fadeInDown">Sodaychan.tech is Coming Soon</h1>
+            <p class="animate__animated animate__fadeInUp">Join us for an innovative journey in digital solutions.</p>
+
+            <!-- Countdown Timer -->
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span id="days">00</span> Days
+                </div>
+                <div class="countdown-item">
+                    <span id="hours">00</span> Hours
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span> Minutes
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span> Seconds
+                </div>
+            </div>
+
+            <a href="#contact" class="btn btn-primary mt-4">Stay Tuned</a>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="container services-section text-center">
+        <h2>Our Services</h2>
+        <div class="service-item">
+            <span class="service-icon">🌐</span> Website Development: Custom and responsive websites tailored to your needs.
+        </div>
+        <div class="service-item">
+            <span class="service-icon">📈</span> Digital Marketing: Boost your brand visibility with effective strategies.
+        </div>
+        <div class="service-item">
+            <span class="service-icon">📱</span> Mobile App Development: Innovative apps for both Android and iOS platforms.
+        </div>
+        <div class="service-item">
+            <span class="service-icon">⚙️</span> IT Consultancy: Expert guidance for your tech needs.
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section" id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form class="contact-form" action="#" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>© 2024 Sodaychan Technologies. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <!-- Countdown Timer Script -->
+    <script>
+        // Set the countdown date
+        const countdownDate = new Date("2024-12-31T00:00:00").getTime();
+
+        // Update the countdown every second
+        const x = setInterval(function () {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(x);
+                document.querySelector(".hero-content").innerHTML = "<h1>We're Live!</h1><p>Visit our website for more information.</p>";
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
