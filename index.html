@@ -1,237 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sodaychan Technologies offers cutting-edge services in website development, digital marketing, and mobile app development. Stay tuned for our launch!">
-    <meta name="keywords" content="Sodaychan, website development, digital marketing, mobile app development, technology solutions">
-    <meta name="author" content="Sodaychan Technologies">
-    <title>Sodaychan.tech | Launching Soon</title>
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Sodaychan.tech | Launching Soon">
-    <meta property="og:description" content="Sodaychan Technologies offers top-tier services in website development, digital marketing, and app development. Stay tuned for the launch.">
-    <meta property="og:image" content="https://via.placeholder.com/1920x1080">
-    <meta property="og:url" content="https://sodaychan.tech">
-    <meta property="og:type" content="website">
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sodaychan.tech | Launching Soon">
-    <meta name="twitter:description" content="Stay tuned for the launch of Sodaychan Technologies, a leader in website development, digital marketing, and mobile app solutions.">
-    <meta name="twitter:image" content="https://via.placeholder.com/1920x1080">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-
-    <!-- Animate.css for Animations -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(45deg, #1c1c1c, #3d3d3d);
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background-image: url('https://via.placeholder.com/1920x1080');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            animation: fadeIn 2s;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
-        }
-
-        .hero-content {
-            z-index: 2;
-            animation: slideInDown 2s;
-        }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #ffd700;
-        }
-
-        p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-        }
-
-        .countdown {
-            font-size: 2rem;
-            font-weight: 300;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .countdown-item {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            min-width: 100px;
-        }
-
-        .countdown-item span {
-            font-size: 3rem;
-            display: block;
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            margin-top: 30px;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            background: linear-gradient(90deg, #ffdd00, #fbb034);
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(90deg, #fbb034, #ffdd00);
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInDown {
-            from {
-                transform: translateY(-50%);
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
-
-        .services-section {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-        }
-
-        .services-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #ffd700;
-        }
-
-        .service-item {
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-    </style>
+    <title>Sodaychan Tech - Digital Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
-<body>
-
-    <div class="hero-section">
-        <div class="overlay"></div>
-        <div class="hero-content text-white">
-            <h1 class="animate__animated animate__fadeInDown">Sodaychan.tech is Launching Soon</h1>
-            <p class="animate__animated animate__fadeInUp">Get ready for the ultimate digital experience with Sodaychan Technologies.</p>
-
-            <!-- Countdown Timer -->
-            <div class="countdown" id="countdown">
-                <div class="countdown-item">
-                    <span id="days">00</span> Days
-                </div>
-                <div class="countdown-item">
-                    <span id="hours">00</span> Hours
-                </div>
-                <div class="countdown-item">
-                    <span id="minutes">00</span> Minutes
-                </div>
-                <div class="countdown-item">
-                    <span id="seconds">00</span> Seconds
-                </div>
-            </div>
-
-            <a href="#" class="btn btn-primary mt-4">Stay Tuned</a>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <h1 class="text-2xl font-bold">Sodaychan Tech</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#services" class="hover:underline">Services</a></li>
+                    <li><a href="#about" class="hover:underline">About</a></li>
+                    <li><a href="#contact" class="hover:underline">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
-
-    <!-- Services Section -->
-    <div class="container services-section text-center">
-        <h2>Our Services</h2>
-        <div class="service-item">✔ Website Development: Creating dynamic, responsive websites tailored to your business needs.</div>
-        <div class="service-item">✔ Digital Marketing: Elevate your brand with cutting-edge digital marketing strategies.</div>
-        <div class="service-item">✔ App Development: Build innovative and user-friendly mobile applications for your business.</div>
-    </div>
-
-    <div class="footer">
-        &copy; 2024 Sodaychan Technologies | All Rights Reserved | <a href="mailto:info@sodaychan.tech" class="text-decoration-none text-white">Contact Us</a>
-    </div>
-
-    <!-- jQuery, Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Countdown Script -->
-    <script>
-        var launchDate = new Date("Dec 31, 2024 00:00:00").getTime();
-
-        var countdownFunction = setInterval(function () {
-            var now = new Date().getTime();
-            var timeLeft = launchDate - now;
-
-            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerHTML = days;
-            document.getElementById("hours").innerHTML = hours;
-            document.getElementById("minutes").innerHTML = minutes;
-            document.getElementById("seconds").innerHTML = seconds;
-
-            if (timeLeft < 0) {
-                clearInterval(countdownFunction);
-                document.getElementById("countdown").innerHTML = "We have launched!";
-            }
-        }, 1000);
-    </script>
-
+    </header>
+    
+    <section class="text-center py-20 bg-blue-500 text-white">
+        <h2 class="text-4xl font-bold">We Provide Digital Marketing & Development Services</h2>
+        <p class="mt-4">Helping businesses grow with cutting-edge technology and strategies.</p>
+    </section>
+    
+    <section id="services" class="py-16 container mx-auto px-6">
+        <h3 class="text-3xl font-bold text-center mb-8">Our Services</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-semibold">Web Development</h4>
+                <p class="mt-2 text-gray-600">We build custom websites tailored to your business needs.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-semibold">Digital Marketing</h4>
+                <p class="mt-2 text-gray-600">SEO, social media, and PPC to boost your brand visibility.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-semibold">UI/UX Design</h4>
+                <p class="mt-2 text-gray-600">Creating user-friendly and visually appealing interfaces.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="bg-gray-200 py-16 text-center">
+        <h3 class="text-3xl font-bold">About Us</h3>
+        <p class="mt-4 px-6 max-w-3xl mx-auto">Sodaychan Tech is dedicated to providing top-notch digital solutions to businesses worldwide.</p>
+    </section>
+    
+    <section id="contact" class="py-16 container mx-auto text-center px-6">
+        <h3 class="text-3xl font-bold">Contact Us</h3>
+        <p class="mt-4">Reach out to us at <strong>03495362692</strong> or email us at <a href="mailto:info@sodaychan.tech" class="text-blue-500 underline">info@sodaychan.tech</a></p>
+    </section>
+    
+    <footer class="bg-blue-600 text-white text-center py-4">
+        <p>&copy; 2024 Sodaychan Tech. All rights reserved.</p>
+    </footer>
 </body>
-
 </html>
