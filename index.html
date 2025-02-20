@@ -12,7 +12,9 @@
             <h1 class="text-2xl font-bold">Sodaychan Tech</h1>
             <nav>
                 <ul class="flex space-x-4">
+                    <li><a href="#home" class="hover:underline">Home</a></li>
                     <li><a href="#services" class="hover:underline">Services</a></li>
+                    <li><a href="#portfolio" class="hover:underline">Portfolio</a></li>
                     <li><a href="#about" class="hover:underline">About</a></li>
                     <li><a href="#contact" class="hover:underline">Contact</a></li>
                 </ul>
@@ -20,9 +22,10 @@
         </div>
     </header>
     
-    <section class="text-center py-20 bg-blue-500 text-white">
+    <section id="home" class="text-center py-20 bg-blue-500 text-white">
         <h2 class="text-4xl font-bold">We Provide Digital Marketing & Development Services</h2>
         <p class="mt-4">Helping businesses grow with cutting-edge technology and strategies.</p>
+        <a href="#contact" class="mt-6 inline-block bg-white text-blue-600 px-6 py-3 rounded-full font-semibold">Get in Touch</a>
     </section>
     
     <section id="services" class="py-16 container mx-auto px-6">
@@ -43,14 +46,38 @@
         </div>
     </section>
     
+    <section id="portfolio" class="py-16 bg-gray-200">
+        <h3 class="text-3xl font-bold text-center mb-8">Our Work</h3>
+        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <img src="https://via.placeholder.com/300" alt="Project 1" class="rounded-md">
+                <h4 class="text-xl font-semibold mt-4">Project Name 1</h4>
+            </div>
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <img src="https://via.placeholder.com/300" alt="Project 2" class="rounded-md">
+                <h4 class="text-xl font-semibold mt-4">Project Name 2</h4>
+            </div>
+            <div class="bg-white p-4 shadow-md rounded-lg">
+                <img src="https://via.placeholder.com/300" alt="Project 3" class="rounded-md">
+                <h4 class="text-xl font-semibold mt-4">Project Name 3</h4>
+            </div>
+        </div>
+    </section>
+    
     <section id="about" class="bg-gray-200 py-16 text-center">
         <h3 class="text-3xl font-bold">About Us</h3>
-        <p class="mt-4 px-6 max-w-3xl mx-auto">Sodaychan Tech is dedicated to providing top-notch digital solutions to businesses worldwide.</p>
+        <p class="mt-4 px-6 max-w-3xl mx-auto">Sodaychan Tech is dedicated to providing top-notch digital solutions to businesses worldwide. Our team consists of experts in web development, digital marketing, and UI/UX design.</p>
     </section>
     
     <section id="contact" class="py-16 container mx-auto text-center px-6">
         <h3 class="text-3xl font-bold">Contact Us</h3>
         <p class="mt-4">Reach out to us at <strong>03495362692</strong> or email us at <a href="mailto:info@sodaychan.tech" class="text-blue-500 underline">info@sodaychan.tech</a></p>
+        <form class="mt-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+            <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-md mb-4">
+            <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-md mb-4">
+            <textarea placeholder="Your Message" class="w-full p-3 border border-gray-300 rounded-md mb-4"></textarea>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold">Send Message</button>
+        </form>
     </section>
     
     <footer class="bg-blue-600 text-white text-center py-4">
