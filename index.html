@@ -3,110 +3,767 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sodaychan Tech - Digital Solutions</title>
+    <title>Sodaychan Technologies - Enhanced</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .service-card:hover .card-inner { transform: rotateY(180deg); }
+        .milestone { opacity: 0; transform: translateX(-50px); transition: all 0.5s ease; }
+        .milestone.in-view { opacity: 1; transform: translateX(0); }
+        .glitch { position: relative; animation: glitch 1s infinite; }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
+        }
+        .faq-item { transition: all 0.3s ease; }
+        .faq-item.active { background-color: #f0f0f0; }
+        .btn-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .btn-hover:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); }
+        .tooltip { position: relative; }
+        .tooltip:hover::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 5px 10px; border-radius: 5px; font-size: 14px; white-space: nowrap; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: #00ffff; z-index: 50; transition: width 0.3s ease; }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-blue-600 text-white py-4">
-        <div class="container mx-auto flex justify-between items-center px-6">
-            <h1 class="text-2xl font-bold">Sodaychan Tech</h1>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="#home" class="hover:underline">Home</a></li>
-                    <li><a href="#services" class="hover:underline">Services</a></li>
-                    <li><a href="#portfolio" class="hover:underline">Portfolio</a></li>
-                    <li><a href="#about" class="hover:underline">About</a></li>
-                    <li><a href="#testimonials" class="hover:underline">Testimonials</a></li>
-                    <li><a href="#faq" class="hover:underline">FAQ</a></li>
-                    <li><a href="#contact" class="hover:underline">Contact</a></li>
-                </ul>
-            </nav>
+<body class="bg-gray-900 text-white font-sans">
+    <!-- Progress Bar -->
+    <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-black flex items-center justify-center z-50 transition-opacity duration-500">
+        <h1 class="text-4xl font-bold text-white glitch" data-text="Sodaychan Technologies">Sodaychan Technologies</h1>
+    </div>
+
+    <!-- Header/Navbar -->
+    <header class="sticky top-0 z-40 bg-gray-900 shadow-lg">
+        <nav class="container mx-auto flex justify-between items-center py-4 px-4">
+            <div class="text-2xl font-bold tracking-tight">Sodaychan Technologies</div>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#home" class="hover:text-cyan-400 transition">Home</a></li>
+                <li><a href="#about" class="hover:text-cyan-400 transition">About</a></li>
+                <li class="relative group">
+                    <a href="#services" class="hover:text-cyan-400 transition">Services</a>
+                    <ul class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg hidden group-hover:block">
+                        <li><a href="#web-dev" class="block px-4 py-2 hover:bg-gray-700">Web Development</a></li>
+                        <li><a href="#mobile-dev" class="block px-4 py-2 hover:bg-gray-700">Mobile Development</a></li>
+                        <li><a href="#consulting" class="block px-4 py-2 hover:bg-gray-700">Consulting</a></li>
+                        <li><a href="#ui-ux" class="block px-4 py-2 hover:bg-gray-700">UI/UX Design</a></li>
+                        <li><a href="#cloud" class="block px-4 py-2 hover:bg-gray-700">Cloud Solutions</a></li>
+                    </ul>
+                </li>
+                <li class="relative group">
+                    <a href="#portfolio" class="hover:text-cyan-400 transition">Portfolio</a>
+                    <ul class="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg hidden group-hover:block">
+                        <li><a href="#web-projects" class="block px-4 py-2 hover:bg-gray-700">Web Projects</a></li>
+                        <li><a href="#mobile-projects" class="block px-4 py-2 hover:bg-gray-700">Mobile Projects</a></li>
+                        <li><a href="#consulting-projects" class="block px-4 py-2 hover:bg-gray-700">Consulting Projects</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact" class="hover:text-cyan-400 transition">Contact</a></li>
+            </ul>
+            <div class="flex items-center space-x-4">
+                <input type="text" id="search" placeholder="Search..." class="p-2 rounded bg-gray-800 text-white hidden md:block">
+                <button id="dark-mode-toggle" class="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition">
+                    <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                <button id="menu-toggle" class="md:hidden p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden bg-gray-800 py-2">
+            <a href="#home" class="block px-4 py-2 hover:bg-gray-700">Home</a>
+            <a href="#about" class="block px-4 py-2 hover:bg-gray-700">About</a>
+            <a href="#services" class="block px-4 py-2 hover:bg-gray-700">Services</a>
+            <a href="#portfolio" class="block px-4 py-2 hover:bg-gray-700">Portfolio</a>
+            <a href="#contact" class="block px-4 py-2 hover:bg-gray-700">Contact</a>
         </div>
     </header>
-    
-    <section id="home" class="text-center py-20 bg-blue-500 text-white">
-        <h2 class="text-4xl font-bold">We Provide Digital Marketing & Development Services</h2>
-        <p class="mt-4">Helping businesses grow with cutting-edge technology and strategies.</p>
-        <a href="#contact" class="mt-6 inline-block bg-white text-blue-600 px-6 py-3 rounded-full font-semibold">Get in Touch</a>
-    </section>
-    
-    <section id="services" class="py-16 container mx-auto px-6">
-        <h3 class="text-3xl font-bold text-center mb-8">Our Services</h3>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h4 class="text-xl font-semibold">Web Development</h4>
-                <p class="mt-2 text-gray-600">We build custom websites tailored to your business needs.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h4 class="text-xl font-semibold">Digital Marketing</h4>
-                <p class="mt-2 text-gray-600">SEO, social media, and PPC to boost your brand visibility.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h4 class="text-xl font-semibold">UI/UX Design</h4>
-                <p class="mt-2 text-gray-600">Creating user-friendly and visually appealing interfaces.</p>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen overflow-hidden">
+        <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+        <div class="relative z-20 flex flex-col items-center justify-center h-full text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4"><span id="typewriter"></span></h1>
+            <p class="text-lg md:text-2xl mb-8" id="tagline">Your partner in digital transformation</p>
+            <div class="space-x-4">
+                <a href="#contact" class="btn-hover px-6 py-3 bg-cyan-500 text-white rounded-full transition duration-300">Get Started</a>
+                <a href="#about" class="btn-hover px-6 py-3 bg-transparent border border-white text-white rounded-full hover:bg-white hover:text-gray-900 transition duration-300">Learn More</a>
             </div>
         </div>
     </section>
-    
-    <section id="portfolio" class="py-16 bg-gray-200">
-        <h3 class="text-3xl font-bold text-center mb-8">Our Work</h3>
-        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-6">
-            <div class="bg-white p-4 shadow-md rounded-lg">
-                <img src="https://via.placeholder.com/300" alt="Project 1" class="rounded-md">
-                <h4 class="text-xl font-semibold mt-4">Project Name 1</h4>
+
+<!-- About Section -->
+<section id="about" class="py-20 bg-gray-100 dark:bg-gray-800">
+    <div class="container max-w-6xl mx-auto px-4">
+        <!-- Heading -->
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-8 text-center text-indigo-900 dark:text-cyan-400">About Us</h2>
+        <p class="text-lg md:text-xl mb-12 text-center text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+            Delivering world-class digital solutions since 2010.
+        </p>
+
+        <!-- Vision -->
+        <div class="vision mb-16 text-center">
+            <blockquote class="text-2xl md:text-3xl italic text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+                "Empowering businesses through innovative technology."
+            </blockquote>
+            <p class="mt-4 text-gray-500 dark:text-gray-400 text-lg">- Our Vision</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline relative mb-16">
+            <h3 class="text-3xl font-bold mb-10 text-center text-indigo-900 dark:text-cyan-400">Our Journey</h3>
+            <div class="flex flex-col md:flex-row md:space-x-8 space-y-8 md:space-y-0 relative">
+                <!-- Vertical line for mobile, horizontal for desktop -->
+                <div class="absolute inset-0 w-1 bg-gray-300 dark:bg-gray-600 mx-auto md:h-1 md:w-full md:top-1/2 md:transform md:-translate-y-1/2"></div>
+
+                <!-- Milestone 1 -->
+                <div class="milestone flex-1 text-center relative z-10">
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <span class="inline-block w-10 h-10 bg-indigo-900 dark:bg-cyan-400 rounded-full mb-4 text-white flex items-center justify-center">2010</span>
+                        <p class="text-gray-700 dark:text-gray-300">Founded Sodaychan Technologies</p>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 -->
+                <div class="milestone flex-1 text-center relative z-10">
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <span class="inline-block w-10 h-10 bg-indigo-900 dark:bg-cyan-400 rounded-full mb-4 text-white flex items-center justify-center">2013</span>
+                        <p class="text-gray-700 dark:text-gray-300">Launched first major product</p>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 -->
+                <div class="milestone flex-1 text-center relative z-10">
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <span class="inline-block w-10 h-10 bg-indigo-900 dark:bg-cyan-400 rounded-full mb-4 text-white flex items-center justify-center">2015</span>
+                        <p class="text-gray-700 dark:text-gray-300">Expanded globally</p>
+                    </div>
+                </div>
+
+                <!-- Milestone 4 -->
+                <div class="milestone flex-1 text-center relative z-10">
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <span class="inline-block w-10 h-10 bg-indigo-900 dark:bg-cyan-400 rounded-full mb-4 text-white flex items-center justify-center">2018</span>
+                        <p class="text-gray-700 dark:text-gray-300">Won innovation award</p>
+                    </div>
+                </div>
+
+                <!-- Milestone 5 -->
+                <div class="milestone flex-1 text-center relative z-10">
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                        <span class="inline-block w-10 h-10 bg-indigo-900 dark:bg-cyan-400 rounded-full mb-4 text-white flex items-center justify-center">2020</span>
+                        <p class="text-gray-700 dark:text-gray-300">Released flagship product</p>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white p-4 shadow-md rounded-lg">
-                <img src="https://via.placeholder.com/300" alt="Project 2" class="rounded-md">
-                <h4 class="text-xl font-semibold mt-4">Project Name 2</h4>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team mt-16">
+            <h3 class="text-3xl md:text-4xl font-bold mb-10 text-center text-indigo-900 dark:text-cyan-400">Our Team</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="team-member text-center relative group">
+                    <img src="https://via.placeholder.com/150" alt="John Doe, CEO & Founder" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md transition-transform group-hover:scale-105">
+                    <h4 class="text-xl md:text-2xl font-bold text-indigo-900 dark:text-cyan-400">John Doe</h4>
+                    <p class="text-gray-700 dark:text-gray-300">CEO & Founder</p>
+                    <div class="flex justify-center space-x-4 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <a href="#" class="text-gray-500 hover:text-cyan-400 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.6c-.9.4-1.8.7-2.8.8 1-.6 1.8-1.6 2.2-2.7-.9.6-2 1-3.1 1.2-1-.9-2.3-1.5-3.8-1.5-2.9 0-5.2 2.4-5.2 5.2 0 .4 0 .8.1 1.2-4.2-.2-7.8-2.2-10.2-5.3.5.3 1 .5 1.6.6-.8-.5-1.6-1.2-2-2.1 0 0-.8 2.3 1 3.9-.5-.1-1-.3-1.5-.4 0 1.6 1.1 2.9 2.6 3.2-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4 1.4-.3 0-.5 0-.8-.1 1.5.9 3.2 1.5 5.1 1.5 4.8 0 9.3-4 9.3-9.3 0-.1 0-.3 0-.4.6-.4 1.2-.9 1.6-1.5z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-member text-center relative group">
+                    <img src="https://via.placeholder.com/150" alt="Jane Smith, CTO" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md transition-transform group-hover:scale-105">
+                    <h4 class="text-xl md:text-2xl font-bold text-indigo-900 dark:text-cyan-400">Jane Smith</h4>
+                    <p class="text-gray-700 dark:text-gray-300">CTO</p>
+                    <div class="flex justify-center space-x-4 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <a href="#" class="text-gray-500 hover:text-cyan-400 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.6c-.9.4-1.8.7-2.8.8 1-.6 1.8-1.6 2.2-2.7-.9.6-2 1-3.1 1.2-1-.9-2.3-1.5-3.8-1.5-2.9 0-5.2 2.4-5.2 5.2 0 .4 0 .8.1 1.2-4.2-.2-7.8-2.2-10.2-5.3.5.3 1 .5 1.6.6-.8-.5-1.6-1.2-2-2.1 0 0-.8 2.3 1 3.9-.5-.1-1-.3-1.5-.4 0 1.6 1.1 2.9 2.6 3.2-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4 1.4-.3 0-.5 0-.8-.1 1.5.9 3.2 1.5 5.1 1.5 4.8 0 9.3-4 9.3-9.3 0-.1 0-.3 0-.4.6-.4 1.2-.9 1.6-1.5z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-member text-center relative group">
+                    <img src="https://via.placeholder.com/150" alt="Mike Johnson, Lead Developer" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-md transition-transform group-hover:scale-105">
+                    <h4 class="text-xl md:text-2xl font-bold text-indigo-900 dark:text-cyan-400">Mike Johnson</h4>
+                    <p class="text-gray-700 dark:text-gray-300">Lead Developer</p>
+                    <div class="flex justify-center space-x-4 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <a href="#" class="text-gray-500 hover:text-cyan-400 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.6c-.9.4-1.8.7-2.8.8 1-.6 1.8-1.6 2.2-2.7-.9.6-2 1-3.1 1.2-1-.9-2.3-1.5-3.8-1.5-2.9 0-5.2 2.4-5.2 5.2 0 .4 0 .8.1 1.2-4.2-.2-7.8-2.2-10.2-5.3.5.3 1 .5 1.6.6-.8-.5-1.6-1.2-2-2.1 0 0-.8 2.3 1 3.9-.5-.1-1-.3-1.5-.4 0 1.6 1.1 2.9 2.6 3.2-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4 1.4-.3 0-.5 0-.8-.1 1.5.9 3.2 1.5 5.1 1.5 4.8 0 9.3-4 9.3-9.3 0-.1 0-.3 0-.4.6-.4 1.2-.9 1.6-1.5z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white p-4 shadow-md rounded-lg">
-                <img src="https://via.placeholder.com/300" alt="Project 3" class="rounded-md">
-                <h4 class="text-xl font-semibold mt-4">Project Name 3</h4>
+        </div>
+    </div>
+</section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="service-card relative w-64 h-80 mx-auto perspective-1000">
+                    <div class="card-inner w-full h-full transition-transform duration-700 transform-style-3d">
+                        <div class="card-front absolute w-full h-full backface-hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+                            <svg class="w-16 h-16 mb-4 text-cyan-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 20a10 10 0 110-20 10 10 0 010 20zm-2-5h4a1 1 0 100-2H8a1 1 0 100 2zm-2-4h8a1 1 0 100-2H6a1 1 0 100 2z"></path></svg>
+                            <h3 class="text-xl font-bold mb-2">Web Development</h3>
+                            <p class="text-center text-gray-700 dark:text-gray-300">Responsive websites</p>
+                            <button class="service-btn mt-4 px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition" data-service="web">Learn More</button>
+                        </div>
+                        <div class="card-back absolute w-full h-full backface-hidden bg-cyan-500 text-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center transform rotate-y-180">
+                            <p class="text-center">Modern, responsive websites.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card relative w-64 h-80 mx-auto perspective-1000">
+                    <div class="card-inner w-full h-full transition-transform duration-700 transform-style-3d">
+                        <div class="card-front absolute w-full h-full backface-hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+                            <svg class="w-16 h-16 mb-4 text-cyan-500" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3H5a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2h-2"></path></svg>
+                            <h3 class="text-xl font-bold mb-2">Mobile Development</h3>
+                            <p class="text-center text-gray-700 dark:text-gray-300">Native & cross-platform</p>
+                            <button class="service-btn mt-4 px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition" data-service="mobile">Learn More</button>
+                        </div>
+                        <div class="card-back absolute w-full h-full backface-hidden bg-cyan-500 text-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center transform rotate-y-180">
+                            <p class="text-center">Seamless mobile apps.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card relative w-64 h-80 mx-auto perspective-1000">
+                    <div class="card-inner w-full h-full transition-transform duration-700 transform-style-3d">
+                        <div class="card-front absolute w-full h-full backface-hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+                            <svg class="w-16 h-16 mb-4 text-cyan-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h14a1 1 0 110 2H3a1 1 0 01-1-1z"></path></svg>
+                            <h3 class="text-xl font-bold mb-2">Consulting</h3>
+                            <p class="text-center text-gray-700 dark:text-gray-300">Strategic IT solutions</p>
+                            <button class="service-btn mt-4 px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition" data-service="consulting">Learn More</button>
+                        </div>
+                        <div class="card-back absolute w-full h-full backface-hidden bg-cyan-500 text-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center transform rotate-y-180">
+                            <p class="text-center">Digital transformation guidance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card relative w-64 h-80 mx-auto perspective-1000">
+                    <div class="card-inner w-full h-full transition-transform duration-700 transform-style-3d">
+                        <div class="card-front absolute w-full h-full backface-hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+                            <svg class="w-16 h-16 mb-4 text-cyan-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16z"></path></svg>
+                            <h3 class="text-xl font-bold mb-2">UI/UX Design</h3>
+                            <p class="text-center text-gray-700 dark:text-gray-300">User-centric designs</p>
+                            <button class="service-btn mt-4 px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition" data-service="uiux">Learn More</button>
+                        </div>
+                        <div class="card-back absolute w-full h-full backface-hidden bg-cyan-500 text-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center transform rotate-y-180">
+                            <p class="text-center">Intuitive and beautiful interfaces.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card relative w-64 h-80 mx-auto perspective-1000">
+                    <div class="card-inner w-full h-full transition-transform duration-700 transform-style-3d">
+                        <div class="card-front absolute w-full h-full backface-hidden bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+                            <svg class="w-16 h-16 mb-4 text-cyan-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 5h16v2H2V5zm0 4h16v2H2V9zm0 4h16v2H2v-2z"></path></svg>
+                            <h3 class="text-xl font-bold mb-2">Cloud Solutions</h3>
+                            <p class="text-center text-gray-700 dark:text-gray-300">Scalable cloud services</p>
+                            <button class="service-btn mt-4 px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition" data-service="cloud">Learn More</button>
+                        </div>
+                        <div class="card-back absolute w-full h-full backface-hidden bg-cyan-500 text-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center transform rotate-y-180">
+                            <p class="text-center">Reliable cloud infrastructure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="service-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg max-w-lg w-full">
+                <h2 id="service-title" class="text-2xl font-bold mb-4 text-indigo-900 dark:text-cyan-400"></h2>
+                <p id="service-description" class="mb-4 text-gray-700 dark:text-gray-300"></p>
+                <button id="close-service-modal" class="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600">Close</button>
             </div>
         </div>
     </section>
-    
-    <section id="testimonials" class="py-16 text-center">
-        <h3 class="text-3xl font-bold">Testimonials</h3>
-        <div class="mt-8 container mx-auto px-6 grid md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <p class="text-gray-600">"Sodaychan Tech transformed our business! Their team is amazing."</p>
-                <h4 class="text-xl font-semibold mt-4">- Client 1</h4>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Portfolio</h2>
+            <div class="filter-buttons flex justify-center space-x-4 mb-8">
+                <button class="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition" data-filter="all">All</button>
+                <button class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition" data-filter="web">Web</button>
+                <button class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition" data-filter="mobile">Mobile</button>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <p class="text-gray-600">"Highly recommended for all digital marketing and web development needs!"</p>
-                <h4 class="text-xl font-semibold mt-4">- Client 2</h4>
+            <div class="carousel relative overflow-hidden">
+                <div class="carousel-inner flex transition-transform duration-500" style="transform: translateX(0);">
+                    <div class="project-card w-full flex-shrink-0 p-4" data-category="web">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <img src="https://via.placeholder.com/300" alt="Project" class="w-full h-48 object-cover mb-4">
+                            <h3 class="text-xl font-bold mb-2 text-indigo-900 dark:text-cyan-400">Web Project 1</h3>
+                            <p class="text-gray-700 dark:text-gray-300">E-commerce platform</p>
+                        </div>
+                    </div>
+                    <div class="project-card w-full flex-shrink-0 p-4" data-category="mobile">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <img src="https://via.placeholder.com/300" alt="Project" class="w-full h-48 object-cover mb-4">
+                            <h3 class="text-xl font-bold mb-2 text-indigo-900 dark:text-cyan-400">Mobile App 1</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Fitness tracking app</p>
+                        </div>
+                    </div>
+                    <div class="project-card w-full flex-shrink-0 p-4" data-category="web">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <img src="https://via.placeholder.com/300" alt="Project" class="w-full h-48 object-cover mb-4">
+                            <h3 class="text-xl font-bold mb-2 text-indigo-900 dark:text-cyan-400">Web Project 2</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Corporate website</p>
+                        </div>
+                    </div>
+                    <div class="project-card w-full flex-shrink-0 p-4" data-category="mobile">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <img src="https://via.placeholder.com/300" alt="Project" class="w-full h-48 object-cover mb-4">
+                            <h3 class="text-xl font-bold mb-2 text-indigo-900 dark:text-cyan-400">Mobile App 2</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Social media app</p>
+                        </div>
+                    </div>
+                    <div class="project-card w-full flex-shrink-0 p-4" data-category="web">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <img src="https://via.placeholder.com/300" alt="Project" class="w-full h-48 object-cover mb-4">
+                            <h3 class="text-xl font-bold mb-2 text-indigo-900 dark:text-cyan-400">Web Project 3</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Portfolio site</p>
+                        </div>
+                    </div>
+                    <div class="project-card w-full flex-shrink-0 p-4" data-category="mobile">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <img src="https://via.placeholder.com/300" alt="Project" class="w-full h-48 object-cover mb-4">
+                            <h3 class="text-xl font-bold mb-2 text-indigo-900 dark:text-cyan-400">Mobile App 3</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Educational app</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700">←</button>
+                <button class="next absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700">→</button>
+            </div>
+        </div>
+        <div id="portfolio-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg max-w-2xl w-full">
+                <h2 id="portfolio-title" class="text-2xl font-bold mb-4 text-indigo-900 dark:text-cyan-400"></h2>
+                <img id="portfolio-image" src="" alt="Project" class="w-full h-48 object-cover mb-4">
+                <p id="portfolio-description" class="mb-4 text-gray-700 dark:text-gray-300"></p>
+                <p id="portfolio-tech" class="mb-4 text-gray-700 dark:text-gray-300"></p>
+                <button id="close-portfolio-modal" class="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600">Close</button>
             </div>
         </div>
     </section>
-    
-    <section id="faq" class="py-16 bg-gray-200">
-        <h3 class="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h3>
-        <div class="container mx-auto px-6 max-w-3xl">
-            <div class="bg-white p-4 rounded-lg shadow-md mb-4">
-                <h4 class="font-semibold">What services do you offer?</h4>
-                <p class="text-gray-600">We provide web development, digital marketing, and UI/UX design services.</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md">
-                <h4 class="font-semibold">How can I contact you?</h4>
-                <p class="text-gray-600">You can reach us via phone or email mentioned in the contact section.</p>
+
+    <!-- Clients Section -->
+    <section id="clients" class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Trusted By</h2>
+            <div class="client-logos flex justify-center space-x-8 overflow-hidden">
+                <img src="https://via.placeholder.com/100" alt="Client 1" class="h-16">
+                <img src="https://via.placeholder.com/100" alt="Client 2" class="h-16">
+                <img src="https://via.placeholder.com/100" alt="Client 3" class="h-16">
+                <img src="https://via.placeholder.com/100" alt="Client 4" class="h-16">
             </div>
         </div>
     </section>
-    
-    <section id="contact" class="py-16 container mx-auto text-center px-6">
-        <h3 class="text-3xl font-bold">Contact Us</h3>
-        <p class="mt-4">Reach out to us at <strong>03495362692</strong> or email us at <a href="mailto:info@sodaychan.tech" class="text-blue-500 underline">info@sodaychan.tech</a></p>
-        <form class="mt-6 max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-            <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-md mb-4">
-            <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-md mb-4">
-            <textarea placeholder="Your Message" class="w-full p-3 border border-gray-300 rounded-md mb-4"></textarea>
-            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold">Send Message</button>
-        </form>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Testimonials</h2>
+            <div class="slider relative overflow-hidden">
+                <div class="slider-inner flex transition-transform duration-500" style="transform: translateX(0);">
+                    <div class="testimonial w-full flex-shrink-0 p-4 text-center">
+                        <img src="https://via.placeholder.com/100" alt="Client" class="w-24 h-24 rounded-full mx-auto mb-4">
+                        <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">"Great service!"</p>
+                        <p class="font-bold text-indigo-900 dark:text-cyan-400">John Doe, TechCorp</p>
+                        <div class="flex justify-center space-x-1 mt-2">
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="testimonial w-full flex-shrink-0 p-4 text-center">
+                        <img src="https://via.placeholder.com/100" alt="Client" class="w-24 h-24 rounded-full mx-auto mb-4">
+                        <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">"Highly professional team."</p>
+                        <p class="font-bold text-indigo-900 dark:text-cyan-400">Jane Smith, InnovateInc</p>
+                        <div class="flex justify-center space-x-1 mt-2">
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="testimonial w-full flex-shrink-0 p-4 text-center">
+                        <img src="https://via.placeholder.com/100" alt="Client" class="w-24 h-24 rounded-full mx-auto mb-4">
+                        <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">"Exceeded expectations."</p>
+                        <p class="font-bold text-indigo-900 dark:text-cyan-400">Mike Lee, StartupX</p>
+                        <div class="flex justify-center space-x-1 mt-2">
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-4 space-x-4">
+                    <button class="prev-slide bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700">←</button>
+                    <div class="dots flex space-x-2">
+                        <button class="dot w-3 h-3 bg-cyan-500 rounded-full"></button>
+                        <button class="dot w-3 h-3 bg-gray-400 rounded-full"></button>
+                        <button class="dot w-3 h-3 bg-gray-400 rounded-full"></button>
+                    </div>
+                    <button class="next-slide bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700">→</button>
+                </div>
+            </div>
+        </div>
     </section>
-    
-    <footer class="bg-blue-600 text-white text-center py-4">
-        <p>&copy; 2024 Sodaychan Tech. All rights reserved.</p>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Pricing Plans</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="pricing-card bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-900 dark:text-cyan-400">Basic</h3>
+                    <p class="text-4xl font-bold mb-4">$99<span class="text-lg">/mo</span></p>
+                    <ul class="text-gray-700 dark:text-gray-300 mb-6 space-y-2">
+                        <li>1 Project</li>
+                        <li>Basic Support</li>
+                        <li>1 User</li>
+                    </ul>
+                    <a href="#contact" class="btn-hover px-6 py-3 bg-cyan-500 text-white rounded-full transition">Choose Plan</a>
+                </div>
+                <div class="pricing-card bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center border-2 border-cyan-500">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-900 dark:text-cyan-400">Pro</h3>
+                    <p class="text-4xl font-bold mb-4">$199<span class="text-lg">/mo</span></p>
+                    <ul class="text-gray-700 dark:text-gray-300 mb-6 space-y-2">
+                        <li>5 Projects</li>
+                        <li>Priority Support</li>
+                        <li>5 Users</li>
+                        <li>Advanced Analytics</li>
+                    </ul>
+                    <a href="#contact" class="btn-hover px-6 py-3 bg-cyan-500 text-white rounded-full transition">Choose Plan</a>
+                </div>
+                <div class="pricing-card bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-900 dark:text-cyan-400">Enterprise</h3>
+                    <p class="text-4xl font-bold mb-4">$499<span class="text-lg">/mo</span></p>
+                    <ul class="text-gray-700 dark:text-gray-300 mb-6 space-y-2">
+                        <li>Unlimited Projects</li>
+                        <li>24/7 Support</li>
+                        <li>Unlimited Users</li>
+                        <li>Custom Solutions</li>
+                    </ul>
+                    <a href="#contact" class="btn-hover px-6 py-3 bg-cyan-500 text-white rounded-full transition">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Contact Us</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <form id="contact-form" class="max-w-lg mx-auto">
+                    <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 mb-4 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <span class="error text-red-500 text-sm hidden">Name is required</span>
+                    <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 mb-4 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <span class="error text-red-500 text-sm hidden">Valid email is required</span>
+                    <input type="tel" name="phone" placeholder="Your Phone Number" class="w-full p-3 mb-4 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <input type="text" name="company" placeholder="Your Company" class="w-full p-3 mb-4 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <textarea name="message" placeholder="Your Message" required class="w-full p-3 mb-4 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white h-32"></textarea>
+                    <span class="error text-red-500 text-sm hidden">Message is required</span>
+                    <button type="submit" class="btn-hover w-full p-3 bg-cyan-500 text-white rounded transition">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <h3 class="text-2xl font-bold mb-4">Get in Touch</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-2"><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-2"><strong>Email:</strong> info@sodaychan.com</p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-2"><strong>Address:</strong> 123 Tech Lane, Innovation City</p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537363153169!3d-37.81720997975159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce6e0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1635215580000!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section id="cta" class="py-20 bg-gradient-to-r from-cyan-500 to-indigo-900 text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Business?</h2>
+            <p class="text-lg mb-8">Contact us today for a free consultation.</p>
+            <a href="#contact" class="btn-hover px-6 py-3 bg-white text-cyan-900 rounded-full transition">Get a Quote</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 bg-gray-900 text-center">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-cyan-400 transition">Home</a></li>
+                        <li><a href="#about" class="hover:text-cyan-400 transition">About</a></li>
+                        <li><a href="#services" class="hover:text-cyan-400 transition">Services</a></li>
+                        <li><a href="#portfolio" class="hover:text-cyan-400 transition">Portfolio</a></li>
+                        <li><a href="#contact" class="hover:text-cyan-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#web-dev" class="hover:text-cyan-400 transition">Web Development</a></li>
+                        <li><a href="#mobile-dev" class="hover:text-cyan-400 transition">Mobile Development</a></li>
+                        <li><a href="#consulting" class="hover:text-cyan-400 transition">Consulting</a></li>
+                        <li><a href="#ui-ux" class="hover:text-cyan-400 transition">UI/UX Design</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                    <form class="flex flex-col space-y-2">
+                        <input type="email" placeholder="Your Email" class="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <button type="submit" class="btn-hover p-2 bg-cyan-500 text-white rounded transition">Subscribe</button>
+                    </form>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="hover:text-cyan-400 transition tooltip" data-tooltip="Twitter"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.6c-.9.4-1.8.7-2.8.8 1-.6 1.8-1.6 2.2-2.7-.9.6-2 1-3.1 1.2-1-.9-2.3-1.5-3.8-1.5-2.9 0-5.2 2.4-5.2 5.2 0 .4 0 .8.1 1.2-4.2-.2-7.8-2.2-10.2-5.3.5.3 1 .5 1.6.6-.8-.5-1.6-1.2-2-2.1 0 0-.8 2.3 1 3.9-.5-.1-1-.3-1.5-.4 0 1.6 1.1 2.9 2.6 3.2-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4 1.4-.3 0-.5 0-.8-.1 1.5.9 3.2 1.5 5.1 1.5 4.8 0 9.3-4 9.3-9.3 0-.1 0-.3 0-.4.6-.4 1.2-.9 1.6-1.5z"></path></svg></a>
+                        <a href="#" class="hover:text-cyan-400 transition tooltip" data-tooltip="LinkedIn"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"></path></svg></a>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-8">© 2023 Sodaychan Technologies. All rights reserved.</p>
+        </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-4 right-4 p-2 bg-cyan-500 text-white rounded-full hidden hover:bg-cyan-600 transition">↑</button>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.style.display = 'none', 500);
+        });
+
+        // Progress Bar
+        const progressBar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            progressBar.style.width = `${scrollPercent}%`;
+        });
+
+        // Dark Mode Toggle
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+        });
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // Search Functionality (Placeholder)
+        const searchInput = document.getElementById('search');
+        searchInput.addEventListener('input', (e) => console.log('Search:', e.target.value));
+
+        // Typewriter Effect with Rotating Taglines
+        const typewriter = document.getElementById('typewriter');
+        const tagline = document.getElementById('tagline');
+        const texts = ["Crafting Innovative Solutions", "Building Your Digital Future", "Transforming Ideas into Reality"];
+        const taglines = ["Your partner in digital transformation", "Innovate with us today", "Technology that empowers"];
+        let textIndex = 0;
+        let charIndex = 0;
+        function type() {
+            if (charIndex < texts[textIndex].length) {
+                typewriter.textContent += texts[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(() => {
+                    typewriter.textContent = '';
+                    charIndex = 0;
+                    textIndex = (textIndex + 1) % texts.length;
+                    tagline.textContent = taglines[textIndex];
+                    type();
+                }, 2000);
+            }
+        }
+        type();
+
+        // Timeline Animation
+        const milestones = document.querySelectorAll('.milestone');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        milestones.forEach(m => observer.observe(m));
+
+        // Service Modals
+        const serviceModal = document.getElementById('service-modal');
+        const serviceTitle = document.getElementById('service-title');
+        const serviceDescription = document.getElementById('service-description');
+        const closeServiceModal = document.getElementById('close-service-modal');
+        const serviceData = {
+            web: { title: "Web Development", desc: "We build modern, responsive websites using the latest technologies." },
+            mobile: { title: "Mobile Development", desc: "Creating seamless mobile experiences for iOS and Android." },
+            consulting: { title: "Consulting", desc: "Strategic IT solutions to guide your digital transformation." },
+            uiux: { title: "UI/UX Design", desc: "Designing intuitive and user-friendly interfaces." },
+            cloud: { title: "Cloud Solutions", desc: "Scalable and secure cloud infrastructure for your business." }
+        };
+        document.querySelectorAll('.service-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const service = btn.dataset.service;
+                serviceTitle.textContent = serviceData[service].title;
+                serviceDescription.textContent = serviceData[service].desc;
+                serviceModal.classList.remove('hidden');
+            });
+        });
+        closeServiceModal.addEventListener('click', () => serviceModal.classList.add('hidden'));
+
+        // Portfolio Carousel and Modal
+        const carouselInner = document.querySelector('.carousel-inner');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        let currentIndex = 0;
+        const totalCards = document.querySelectorAll('.project-card').length;
+        function updateCarousel() {
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < totalCards - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+        const portfolioModal = document.getElementById('portfolio-modal');
+        const portfolioTitle = document.getElementById('portfolio-title');
+        const portfolioImage = document.getElementById('portfolio-image');
+        const portfolioDescription = document.getElementById('portfolio-description');
+        const portfolioTech = document.getElementById('portfolio-tech');
+        const closePortfolioModal = document.getElementById('close-portfolio-modal');
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                portfolioTitle.textContent = card.querySelector('h3').textContent;
+                portfolioImage.src = card.querySelector('img').src;
+                portfolioDescription.textContent = card.querySelector('p').textContent;
+                portfolioTech.textContent = "Tech: HTML, CSS, JavaScript";
+                portfolioModal.classList.remove('hidden');
+            });
+        });
+        closePortfolioModal.addEventListener('click', () => portfolioModal.classList.add('hidden'));
+
+        // Testimonials Slider
+        const sliderInner = document.querySelector('.slider-inner');
+        const dots = document.querySelectorAll('.dot');
+        const prevSlide = document.querySelector('.prev-slide');
+        const nextSlide = document.querySelector('.next-slide');
+        let sliderIndex = 0;
+        const totalSlides = document.querySelectorAll('.testimonial').length;
+        function showSlide(index) {
+            sliderInner.style.transform = `translateX(-${index * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('bg-cyan-500', i === index);
+                dot.classList.toggle('bg-gray-400', i !== index);
+            });
+        }
+        prevSlide.addEventListener('click', () => {
+            sliderIndex = (sliderIndex - 1 + totalSlides) % totalSlides;
+            showSlide(sliderIndex);
+        });
+        nextSlide.addEventListener('click', () => {
+            sliderIndex = (sliderIndex + 1) % totalSlides;
+            showSlide(sliderIndex);
+        });
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                sliderIndex = i;
+                showSlide(sliderIndex);
+            });
+        });
+        setInterval(() => {
+            sliderIndex = (sliderIndex + 1) % totalSlides;
+            showSlide(sliderIndex);
+        }, 5000);
+        showSlide(sliderIndex);
+
+        // Contact Form Validation
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            form.querySelectorAll('input[required], textarea[required]').forEach(input => {
+                const error = input.nextElementSibling;
+                if (!input.value) {
+                    error.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    error.classList.add('hidden');
+                }
+                if (input.name === 'email' && !/\S+@\S+\.\S+/.test(input.value)) {
+                    error.classList.remove('hidden');
+                    isValid = false;
+                }
+            });
+            if (isValid) {
+                alert('Message sent! We’ll get back to you soon.');
+                form.reset();
+            }
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('hidden', window.scrollY <= 300);
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    </script>
 </body>
 </html>
